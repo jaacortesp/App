@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Convertidor de Recetas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="addIngredient()">+</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="recipeForm" (ngSubmit)="onCalculate()">
+      <div formArrayName="ingredients">
+        <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Ingrediente</ion-label>
+                <ion-input formControlName="name"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item>
+                <ion-label position="floating">Cantidad</ion-label>
+                <ion-input type="number" formControlName="quantity"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item>
+                <ion-label>Unidad</ion-label>
+                <ion-select formControlName="unit">
+                  <ion-select-option value="gramos">Gramos</ion-select-option>
+                  <ion-select-option value="mililitros">Mililitros</ion-select-option>
+                  <ion-select-option value="cucharadas">Cucharadas</ion-select-option>
+                  <ion-select-option value="cucharaditas">Cucharaditas</ion-select-option>
+                  <ion-select-option value="tazas">Tazas</ion-select-option>
+                  <ion-select-option value="pizcas">Pizcas</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Tiempo de Horneado (min)</ion-label>
+            <ion-input type="number" formControlName="bakingTime"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Temperatura (°C)</ion-label>
+            <ion-input type="number" formControlName="temperature"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label>¿No requiere horneado?</ion-label>
+        <ion-checkbox formControlName="noBaking"></ion-checkbox>
+      </ion-item>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Porciones Originales</ion-label>
+            <ion-input type="number" formControlName="originalPortions"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Porciones Deseadas</ion-label>
+            <ion-input type="number" formControlName="desiredPortions"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-button expand="block" type="submit">Calcular</ion-button>
+    </form>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-textarea placeholder="Resultado" [value]="result" readonly></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Título</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Instrucciones</ion-label>
+          <ion-textarea formControlName="instructions"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" (click)="onSave()">Guardar Receta</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

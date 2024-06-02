@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div *ngIf="userData">
+      <p>Welcome, {{ userData.username }}</p>
+      <p>Your password is: {{ userData.password }}</p>
+    </div>
+  </ion-content>
+  
